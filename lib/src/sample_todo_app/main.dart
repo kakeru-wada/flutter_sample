@@ -61,7 +61,7 @@ class TodoAddPage extends StatefulWidget{
 class _TodoAddPageState extends State<TodoAddPage> {
   String _text = '';
   @override
-  ifText() async {
+  showEmptyAlertText() async {
     var result = await showDialog<int>(
       context: context,
       barrierDismissible: false,
@@ -70,10 +70,6 @@ class _TodoAddPageState extends State<TodoAddPage> {
           title: Text('入力欄が空です'),
           content: Text('メモ欄を入力してください'),
           actions: <Widget>[
-            FlatButton(
-              child: Text('キャンセル'),
-              onPressed: () => Navigator.pop(context),
-            ),
             FlatButton(
               child: Text('OK'),
               onPressed: () => Navigator.pop(context),
@@ -91,20 +87,65 @@ class _TodoAddPageState extends State<TodoAddPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(_text, style: TextStyle(color: Colors.blue),),
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
-                hintText: 'メモ入力欄',
+                labelText: 'メモの内容を入力',
+                hintText: 'メモの内容を入力',
                 hintStyle: TextStyle(
                   color: Colors.grey,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius:  BorderRadius.circular(0),
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Colors.blue
+                  )
+                ),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blue
+                    )
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(0),
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Colors.blue
+                  )
+                ),
+                errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blue
+                    )
                 )
               ),
-              onChanged: (String value){
+              onChanged: (String value) {
                 setState(() {
                   _text = value;
                 });
               },
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (String? value) {
+                return (value != null && value.isEmpty) ? 'メモ欄を入力してください' : null;
+              },
             ),
+            // TextField(
+            //   decoration: InputDecoration(
+            //     hintText: 'メモ入力欄',
+            //     hintStyle: TextStyle(
+            //       color: Colors.grey,
+            //     )
+            //   ),
+            //   onChanged: (String value){
+            //     setState(() {
+            //       _text = value;
+            //     });
+            //   },
+            // ),
             const SizedBox(height: 8),
             Container(
               width: double.infinity,
@@ -113,22 +154,22 @@ class _TodoAddPageState extends State<TodoAddPage> {
                   if (_text != '') {
                     Navigator.of(context).pop(_text);
                   }else{
-                    ifText();
+                    showEmptyAlertText();
                   }
                 },
                 child: Text('リスト追加', style: TextStyle(color: Colors.white),),
               ),
             ),
             const SizedBox(height: 8,),
-            Container(
-              width: double.infinity,
-              child: TextButton(
-                onPressed: (){
-                  Navigator.of(context).pop();
-                },
-                child: Text('キャンセル'),
-              ),
-            )
+            // Container(
+            //   width: double.infinity,
+            //   child: TextButton(
+            //     onPressed: (){
+            //       Navigator.of(context).pop();
+            //     },
+            //     child: Text('キャンセル'),
+            //   ),
+            // )
           ],
         ),
       ),
