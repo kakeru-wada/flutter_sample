@@ -70,10 +70,10 @@ class _TodoAddPageState extends State<TodoAddPage> {
           title: Text('入力欄が空です'),
           content: Text('メモ欄を入力してください'),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('OK'),
               onPressed: () => Navigator.pop(context),
-            )
+            ),
           ],
         );}
     );}
