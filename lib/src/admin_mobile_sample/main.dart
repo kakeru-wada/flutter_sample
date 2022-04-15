@@ -1,30 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+//providerの記載
+final addOrDelProvider = Provider((ref) => 0);
+
+void main() {
+  runApp(
+    ProviderScope(child: AdminMobileSampleApp())
+  );
+}
 
 //共通部分
-class MyApp extends StatelessWidget {
+class AdminMobileSampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.light(),
-      home: AdminMobilePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.grey
+      ),
+      home: AdminMobilePageState(),
     );
   }
 }
 
-class AdminMobilePage extends StatelessWidget {
+class AdminMobilePageState extends StatefulWidget{
+  @override
+  _AdminMobilePageState createState() => _AdminMobilePageState();
+}
+
+class _AdminMobilePageState extends State<AdminMobilePageState> {
+  List<String> Post = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        children: [
-          //ここにウィジェットを並べる
-          SideNavigation(),
-          VerticalDivider(thickness: 1, width: 1,),
-          Expanded(child: PostList())
-        ],
-      )
+      body: SafeArea(
+        child: Row(
+          children: [
+            SideNavigation(),
+            VerticalDivider(thickness: 1, width: 1,),
+            Expanded(child: PostList())
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: ()async {
+          final newListText = await Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return AddPostPage();
+            }),
+          );
+          if (newListText != null) {
+            setState(() {
+              Post.add(newListText);
+            });
+          }
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
@@ -108,7 +141,7 @@ class _Post extends StatelessWidget {
   final Color colorPositive;
   final String textPositive;
   final Color colorNegative;
-  final String textNegative;
+  final String deleteText;
 
   const _Post({
     Key? key,
@@ -119,7 +152,7 @@ class _Post extends StatelessWidget {
     this.colorPositive = Colors.blueAccent,
     this.textPositive = 'default_text',
     this.colorNegative = Colors.amberAccent,
-    this.textNegative = 'default_textNegative',
+    this.deleteText = 'default_deleteText',
 }) : super(key:  key);
 
   //投稿cardを表示するwidget
@@ -187,13 +220,14 @@ class _Post extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 24),
+                  //↓でonpressedで削除機能の実装
                   Expanded(
                       child: TextButton(
                         style: TextButton.styleFrom(
                           primary: colorNegative,
                         ),
                         onPressed: () {},
-                        child: Text(textNegative),
+                        child: Text(deleteText),
                       )),
                   SizedBox(width: 8),
                   Expanded(
@@ -213,8 +247,6 @@ class _Post extends StatelessWidget {
       ),
     );
   }
-
-
 }
 
 class _PostContent extends StatelessWidget{
@@ -245,6 +277,79 @@ class PostList extends StatelessWidget {
       ),
 
 
+    );
+  }
+}
+
+class PostArgments {
+  String _name = '';
+  String _postContent = '';
+
+  PostArgments(this._name, this._postContent);
+}
+
+class AddPostPage extends StatefulWidget{
+  @override
+  _AddPostPageState createState() => _AddPostPageState();
+}
+
+class _AddPostPageState extends State<AddPostPage> {
+  String _name = '';
+  String _postContent = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('投稿内容'),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: '名前を入力',
+                hintText: '名前',
+                hintStyle: TextStyle(
+                  color: Colors.grey
+                )
+              ),
+              onChanged: (String value) {
+                setState(() {
+                  _name = value;
+                });
+              },
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              decoration: InputDecoration(
+                  labelText: '投稿内容を登録',
+                  hintText: '投稿内容',
+                  hintStyle: TextStyle(
+                      color: Colors.grey
+                  )
+              ),
+              onChanged: (String value) {
+                setState(() {
+                  _postContent = value;
+                });
+              },
+            ),
+            const SizedBox(height: 8),
+            Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(PostArgments(_name, _postContent));
+                },
+                child: Text('投稿', style: TextStyle(color: Colors.white),),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

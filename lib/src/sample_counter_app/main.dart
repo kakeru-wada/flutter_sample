@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final counterProvider = StateProvider((ref) => 0);
 
-void main () {
-  runApp(
-    ProviderScope(child: CounterApp())
-  );
-}
+// void main () {
+//   runApp(
+//     ProviderScope(child: CounterApp())
+//   );
+// }
 
 class CounterApp extends StatelessWidget {
   @override
@@ -28,11 +28,11 @@ class SamplePage extends ConsumerWidget{
     final count = ref.watch(counterProvider);
     return Scaffold(
         appBar: AppBar(title: const Text('カウンターアプリ（サンプル）')),
-    body: Center(
-    child: Text('$count'),
-    ),
-    floatingActionButton: FloatingActionButton(
-    onPressed: () => ref.read(counterProvider.notifier).state++,
-    child: const Icon(Icons.add),
+      body: Center(
+        child: Text('$count'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => ref.read(counterProvider.notifier).state++,
+        child: const Icon(Icons.add),
     ));
   }}
