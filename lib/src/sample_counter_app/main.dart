@@ -3,7 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final counterProvider = StateProvider((ref) => 0);
 
-
+void main () {
+  runApp(
+    ProviderScope(child: CounterApp())
+  );
+}
 
 class CounterApp extends StatelessWidget {
   @override
