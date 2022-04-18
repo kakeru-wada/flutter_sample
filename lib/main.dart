@@ -6,4 +6,5 @@ void main() {
   // runApp(ListViewApp());
   // runApp(SampleTodoApp());
   // runApp(LogInUI());
+  runApp(AdminMobileSampleApp());
 }

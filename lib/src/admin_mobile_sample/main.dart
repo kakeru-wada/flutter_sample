@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-//providerの記載
-final addOrDelProvider = Provider((ref) => 0);
-
-void main() {
-  runApp(
-    ProviderScope(child: AdminMobileSampleApp())
-  );
-}
+//削除情報を扱うprovider
+final deleteListProvider = StateProvider((ref) => []);
+//投稿内容を補完するprovider
+final PostTextListProvider = StateProvider((ref) => []);
 
 //共通部分
 class AdminMobileSampleApp extends StatelessWidget {
@@ -16,21 +12,13 @@ class AdminMobileSampleApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.grey
-      ),
-      home: AdminMobilePageState(),
+      theme: ThemeData.light(),
+      home: ProviderScope(child: AdminMobilePageState()),
     );
   }
 }
 
-class AdminMobilePageState extends StatefulWidget{
-  @override
-  _AdminMobilePageState createState() => _AdminMobilePageState();
-}
-
-class _AdminMobilePageState extends State<AdminMobilePageState> {
-  List<String> Post = [];
+class AdminMobilePageState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,18 +33,13 @@ class _AdminMobilePageState extends State<AdminMobilePageState> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: ()async {
-          final newListText = await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
+          await Navigator.of(context).push(
+            MaterialPageRoute(builder: (context){
               return AddPostPage();
-            }),
+            })
           );
-          if (newListText != null) {
-            setState(() {
-              Post.add(newListText);
-            });
-          }
-        },
-        child: Icon(Icons.add),
+            },
+        child: Icon(Icons.add)
       ),
     );
   }
@@ -104,7 +87,6 @@ class _SideNavigationState extends State<SideNavigation> {
 //post部分
 
 //postのheader部分の作成
-//_を付けてprivateにし、PostListで呼び出す
 class _PostsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -124,7 +106,7 @@ class _PostsHeader extends StatelessWidget {
                   )
               ),
             ),
-            title: Text('Posts'),
+            title: Text('投稿内容'),
             subtitle: Text(''),
           ),
         ),
@@ -133,7 +115,7 @@ class _PostsHeader extends StatelessWidget {
   }
 }
 
-class _Post extends StatelessWidget {
+class _Post extends ConsumerWidget {
   final String name;
   final String message;
   final String textReason;
@@ -157,7 +139,7 @@ class _Post extends StatelessWidget {
 
   //投稿cardを表示するwidget
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Card(
@@ -226,7 +208,8 @@ class _Post extends StatelessWidget {
                         style: TextButton.styleFrom(
                           primary: colorNegative,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                        },
                         child: Text(deleteText),
                       )),
                   SizedBox(width: 8),
@@ -249,17 +232,21 @@ class _Post extends StatelessWidget {
   }
 }
 
-class _PostContent extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return _Post();
-  }
-}
+// class _PostContent extends ConsumerWidget{
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     String _name = ref.watch(nameProvider);
+//     String _message = ref.watch(messageProvider);
+//     Widget onePost = _Post(name: _name, message: _message,);
+//     return _Post();
+//   }
+// }
 // class _PostGreen extends StatelessWidget{}
 
-class PostList extends StatelessWidget {
+class PostList extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    List PostTextsList = ref.watch(PostTextListProvider);
     return Container(
       padding: EdgeInsets.only(top: 48),
       child: Column(
@@ -267,38 +254,26 @@ class PostList extends StatelessWidget {
         children: [
           _PostsHeader(),
           Expanded(
-            child: ListView(
-              children: [
-                _PostContent()
-              ],
-            ),
+            child: ListView.builder(
+              itemCount: PostTextsList.length,
+              itemBuilder: (context, index) {
+                return PostTextsList[index];
+              },
+            )
           )
-        ],
+        ]
       ),
-
-
     );
   }
 }
 
-class PostArgments {
-  String _name = '';
-  String _postContent = '';
-
-  PostArgments(this._name, this._postContent);
-}
-
-class AddPostPage extends StatefulWidget{
-  @override
-  _AddPostPageState createState() => _AddPostPageState();
-}
-
-class _AddPostPageState extends State<AddPostPage> {
+class AddPostPage extends ConsumerWidget{
   String _name = '';
   String _postContent = '';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    List PostTextsList = ref.watch(PostTextListProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('投稿内容'),
@@ -317,9 +292,7 @@ class _AddPostPageState extends State<AddPostPage> {
                 )
               ),
               onChanged: (String value) {
-                setState(() {
                   _name = value;
-                });
               },
             ),
             const SizedBox(height: 8),
@@ -332,9 +305,7 @@ class _AddPostPageState extends State<AddPostPage> {
                   )
               ),
               onChanged: (String value) {
-                setState(() {
                   _postContent = value;
-                });
               },
             ),
             const SizedBox(height: 8),
@@ -342,7 +313,9 @@ class _AddPostPageState extends State<AddPostPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(PostArgments(_name, _postContent));
+                  Widget aPost = _Post(name: _name, message: _postContent);
+                  PostTextsList.add(aPost);
+                  Navigator.of(context).pop();
                 },
                 child: Text('投稿', style: TextStyle(color: Colors.white),),
               ),
