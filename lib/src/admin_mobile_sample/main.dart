@@ -32,8 +32,8 @@ class AdminMobilePageState extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()async {
-          await Navigator.of(context).push(
+        onPressed: () {
+          Navigator.of(context).push(
             MaterialPageRoute(builder: (context){
               return AddPostPage();
             })
