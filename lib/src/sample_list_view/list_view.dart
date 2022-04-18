@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../main.dart';
 
 class ListViewApp extends StatelessWidget {
   final List<Map<String, dynamic>> listItems = [
@@ -22,6 +23,10 @@ class ListViewApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
+        appBar: appBar(
+          title: 'リスト',
+        ),
+        drawer: appNavBar(),
         body: Column(
           children: <Widget>[
             Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../main.dart';
 
 const Color kAccentColor = Color(0xFFFE7C64);
 const Color kBackgroundColor = Color(0xFF19283D);
@@ -25,6 +26,10 @@ class LogInUI extends StatelessWidget {
 class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(
+        title: 'Login',
+      ),
+      drawer: appNavBar(),
       backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(

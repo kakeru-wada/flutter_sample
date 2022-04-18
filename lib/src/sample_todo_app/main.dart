@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../main.dart';
 
 class SampleTodoApp extends StatelessWidget {
   @override
@@ -22,10 +23,10 @@ class _TodoListPageState extends State<TodoListPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('メモリスト一覧（テスト）'),
-        centerTitle: true,
+      appBar: appBar(
+        title: 'メモ一覧',
       ),
+      drawer: appNavBar(),
       body: ListView.builder(
         itemCount: todoList.length,
         itemBuilder: (context, index) {

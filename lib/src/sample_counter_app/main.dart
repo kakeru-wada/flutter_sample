@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../main.dart';
 
 final counterProvider = StateProvider((ref) => 0);
-
-// void main () {
-//   runApp(
-//     ProviderScope(child: CounterApp())
-//   );
-// }
 
 class CounterApp extends StatelessWidget {
   @override
@@ -17,7 +12,7 @@ class CounterApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green
       ),
-      home: SamplePage(),
+      home: ProviderScope(child: SamplePage(),),
     );
   }
 }
@@ -27,7 +22,10 @@ class SamplePage extends ConsumerWidget{
   Widget build(BuildContext context, WidgetRef ref) {
     final count = ref.watch(counterProvider);
     return Scaffold(
-        appBar: AppBar(title: const Text('カウンターアプリ（サンプル）')),
+      appBar: appBar(
+        title: 'カウンターアプリ',
+      ),
+      drawer: appNavBar(),
       body: Center(
         child: Text('$count'),
       ),

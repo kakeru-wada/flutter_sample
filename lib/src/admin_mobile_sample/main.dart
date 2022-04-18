@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../main.dart';
 //削除情報を扱うprovider
 final deleteListProvider = StateProvider((ref) => []);
 //投稿内容を補完するprovider
@@ -22,6 +23,10 @@ class AdminMobilePageState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(
+        title: '',
+      ),
+      drawer: appNavBar(),
       body: SafeArea(
         child: Row(
           children: [
