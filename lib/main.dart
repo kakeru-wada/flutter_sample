@@ -78,7 +78,6 @@ class _appCardListState extends State<appCardList> {
 }
 
 class appNavBar extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -88,19 +87,15 @@ class appNavBar extends StatelessWidget {
             ListView.builder(
               itemCount: appList.length,
               itemBuilder: (context, index) {
-                return Card(
-                  child: Expanded(
-                    child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) {
-                            return appList[index];
-                          })
-                      );
-                    },
-                      child: Text(appNameList[index]),
-                  ),
-                ),
+                return ListTile(
+                  title: Text(appNameList[index]),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) {
+                          return appList[index];
+                        })
+                    );
+                  },
                 );
               },
             )
