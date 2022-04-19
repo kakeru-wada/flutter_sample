@@ -12,7 +12,9 @@ List appList = [
   SampleTodoApp(),
   CounterApp(),
   LogInUI(),
-  AdminMobileSampleApp()
+  AdminMobileSampleApp(),
+  BatteryOptimizer(),
+  FlightBooking(),
 ];
 List<String> appNameList = [
   'first_sample',
@@ -20,7 +22,9 @@ List<String> appNameList = [
   'sample_todo_app',
   'sample_counter',
   'sign_in_sample',
-  'admin_mobile_sample'
+  'admin_mobile_sample',
+  'battery_optimizer_sample',
+  'flight_booking_sample'
 ];
 
 class appListPage extends StatelessWidget {
@@ -52,7 +56,6 @@ class _appCardListState extends State<appCardList> {
         itemCount: appList.length,
         itemBuilder: (context, index) {
           return Card(
-            child: Expanded(
               child: TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -69,7 +72,6 @@ class _appCardListState extends State<appCardList> {
                   ),
                 ),
               ),
-            ),
           );
         },
       ),
@@ -85,6 +87,8 @@ class appNavBar extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(child: Text('app list')),
             ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               itemCount: appList.length,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -106,11 +110,13 @@ class appNavBar extends StatelessWidget {
 }
 class appBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
-  appBar({this.title = ''});
+  final int elevation;
+  appBar({this.title = '', this.elevation = 4});
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
         child: AppBar(
+          // elevation: elevation,
           centerTitle: true,
           title: Text(title),
           backgroundColor: Theme.of(context).primaryColor,
