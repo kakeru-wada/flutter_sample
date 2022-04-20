@@ -5,3 +5,5 @@ export 'sign_in_sample/main.dart';
 export 'admin_mobile_sample/main.dart';
 export 'battery_optimizer_sample/main.dart';
 export 'flight_booking_sample/main.dart';
+export 'animation_sample/main.dart';
+export 'animation_sample2/main.dart';

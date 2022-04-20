@@ -7,6 +7,7 @@ void main() {
 }
 
 List appList = [
+  appListPage(),
   FirstSampleApp(),
   ListViewApp(),
   SampleTodoApp(),
@@ -15,8 +16,11 @@ List appList = [
   AdminMobileSampleApp(),
   BatteryOptimizer(),
   FlightBooking(),
+  AnimationSample(),
+  AnimationSample2(),
 ];
 List<String> appNameList = [
+  'メインメニュー',
   'first_sample',
   'sample_list_view',
   'sample_todo_app',
@@ -24,7 +28,9 @@ List<String> appNameList = [
   'sign_in_sample',
   'admin_mobile_sample',
   'battery_optimizer_sample',
-  'flight_booking_sample'
+  'flight_booking_sample',
+  'animation_sample',
+  'animation_sample2'
 ];
 
 class appListPage extends StatelessWidget {
@@ -53,19 +59,19 @@ class _appCardListState extends State<appCardList> {
       ),
       drawer: appNavBar(),
       body: ListView.builder(
-        itemCount: appList.length,
+        itemCount: appList.length-1,
         itemBuilder: (context, index) {
           return Card(
               child: TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
-                      return appList[index];
+                      return appList[index+1];
                     })
                   );
                 },
                 child: Text(
-                  appNameList[index],
+                  appNameList[index+1],
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20
@@ -85,14 +91,25 @@ class appNavBar extends StatelessWidget {
     return Drawer(
         child: ListView(
           children: <Widget>[
-            DrawerHeader(child: Text('app list')),
+            SizedBox(
+              height: 100,
+              child:
+              DrawerHeader(
+                  child: Text(
+                    'app list',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                        color: Theme.of(context).primaryColor),)
+              ),
+            ),
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: appList.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(appNameList[index]),
+                  title: Text(appNameList[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) {
