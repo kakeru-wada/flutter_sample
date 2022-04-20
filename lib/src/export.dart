@@ -7,3 +7,4 @@ export 'battery_optimizer_sample/main.dart';
 export 'flight_booking_sample/main.dart';
 export 'animation_sample/main.dart';
 export 'animation_sample2/main.dart';
+export 'online_learning_sample/main.dart';
