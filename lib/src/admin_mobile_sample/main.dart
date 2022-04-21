@@ -28,7 +28,7 @@ class AdminMobilePageState extends StatelessWidget {
       appBar: appBar(
         title: '',
       ),
-      drawer: appNavBar(),
+      // drawer: appNavBar(),
       body: SafeArea(
         child: Row(
           children: [

@@ -19,6 +19,11 @@ class _SideNavigationState extends State<SideNavigation> {
         },
         destinations: [
           NavigationRailDestination(
+            icon: Icon(Icons.dehaze_sharp),
+            label: Text('AppMenu'),
+
+          ),
+          NavigationRailDestination(
             icon: Icon(Icons.thumbs_up_down),
             label: Text('ThumbsUpDown'),
           ),

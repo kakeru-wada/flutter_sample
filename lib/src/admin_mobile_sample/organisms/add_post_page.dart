@@ -49,8 +49,7 @@ class AddPostPage extends ConsumerWidget{
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Widget aPost = Post(name: _name, message: _postContent);
-                  PostTextsList.add(aPost);
+                  //ここでaddPostの処理？
                   Navigator.of(context).pop();
                 },
                 child: Text('投稿', style: TextStyle(color: Colors.white),),

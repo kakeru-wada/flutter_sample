@@ -20,6 +20,7 @@ List appList = [
   AnimationSample2(),
   LearningSample(),
   ParentWidget(),
+  TodoListView(),
 ];
 List<String> appNameList = [
   'メインメニュー',
@@ -35,6 +36,7 @@ List<String> appNameList = [
   'animation_sample2',
   'online_learning_sample',
   'provider_sample'
+  'stateNotifier_test'
 ];
 
 class appListPage extends StatelessWidget {
