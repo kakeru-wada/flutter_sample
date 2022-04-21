@@ -19,6 +19,7 @@ List appList = [
   AnimationSample(),
   AnimationSample2(),
   LearningSample(),
+  ParentWidget(),
 ];
 List<String> appNameList = [
   'メインメニュー',
@@ -32,7 +33,8 @@ List<String> appNameList = [
   'flight_booking_sample',
   'animation_sample',
   'animation_sample2',
-  'online_learning_sample'
+  'online_learning_sample',
+  'provider_sample'
 ];
 
 class appListPage extends StatelessWidget {
