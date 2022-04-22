@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../export.dart';
+import '../../export.dart';
 
 class Post extends ConsumerWidget {
   final String name;
@@ -122,7 +122,7 @@ class Post extends ConsumerWidget {
 class PostList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List PostTextsList = ref.watch(PostTextListProvider);
+    List PostTextsList = ref.watch(postProvider);
     return Container(
       padding: EdgeInsets.only(top: 48),
       child: Column(

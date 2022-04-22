@@ -3,11 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'export.dart';
 import '../../main.dart';
 
-//削除情報を扱うprovider
-final deleteListProvider = StateProvider((ref) => []);
-//投稿内容を補完するprovider
-final PostTextListProvider = StateProvider((ref) => []);
-
 //共通部分
 class AdminMobileSampleApp extends StatelessWidget {
   @override
@@ -42,7 +37,7 @@ class AdminMobilePageState extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context){
-              return AddPostPage();
+              return ProviderScope(child: AddPostPage());
             })
           );
             },

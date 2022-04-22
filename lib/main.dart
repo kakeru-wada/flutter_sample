@@ -35,7 +35,7 @@ List<String> appNameList = [
   'animation_sample',
   'animation_sample2',
   'online_learning_sample',
-  'provider_sample'
+  'provider_sample',
   'stateNotifier_test'
 ];
 

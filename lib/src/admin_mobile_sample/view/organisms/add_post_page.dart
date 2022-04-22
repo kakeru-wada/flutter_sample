@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../export.dart';
+import '../../export.dart';
 
 
 class AddPostPage extends ConsumerWidget{
   String _name = '';
   String _postContent = '';
+  var _nameController = TextEditingController();
+  var _messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List PostTextsList = ref.watch(PostTextListProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('投稿内容'),
@@ -28,8 +29,9 @@ class AddPostPage extends ConsumerWidget{
                   )
               ),
               onChanged: (String value) {
-                _name = value;
+                // _name = value;
               },
+              controller: _nameController,
             ),
             const SizedBox(height: 8),
             TextFormField(
@@ -41,15 +43,16 @@ class AddPostPage extends ConsumerWidget{
                   )
               ),
               onChanged: (String value) {
-                _postContent = value;
+                // _postContent = value;
               },
+              controller: _messageController,
             ),
             const SizedBox(height: 8),
             Container(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  //ここでaddPostの処理？
+                  ref.watch(postProvider.notifier).addPost(Post(name: _nameController.text, message: _messageController.text,));
                   Navigator.of(context).pop();
                 },
                 child: Text('投稿', style: TextStyle(color: Colors.white),),
