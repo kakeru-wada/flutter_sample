@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../export.dart';
+import '../util/color.dart';
 
 class Footer extends StatelessWidget {
   @override
@@ -11,7 +11,7 @@ class Footer extends StatelessWidget {
           'Dont have Account?',
           style:  Theme.of(context).textTheme.bodyText2!.copyWith(color: kTextColorSecondary),
         ),
-        SizedBox(width: 4,),
+        const SizedBox(width: 4,),
         Text(
           'Sign up',
           style: Theme.of(context).textTheme.bodyText2!.copyWith(color: kTextColorPrimary),

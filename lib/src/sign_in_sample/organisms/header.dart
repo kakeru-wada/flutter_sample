@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import '../export.dart';
-import '../../../../main.dart';
-
+import '../util/color.dart';
 
 class _HeaderCurveClipper extends CustomClipper<Path> {
   @override
@@ -136,11 +134,7 @@ class _HeaderBackButton extends StatelessWidget {
           )
       ),
       onPressed: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
-              return appListPage();
-            })
-        );
+        Navigator.of(context).pop();
       },
       child: Icon(Icons.chevron_left, color: kIconColor,),
     );

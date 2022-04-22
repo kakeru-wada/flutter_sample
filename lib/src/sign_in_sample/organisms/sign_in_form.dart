@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../export.dart';
+import '../util/color.dart';
 
 class _CustomTextField extends StatelessWidget {
   final String labelText;
@@ -19,17 +19,17 @@ class _CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
           labelText: labelText,
           hintText: hintText,
-          hintStyle: TextStyle(color: kTextColorSecondary),
+          hintStyle: const TextStyle(color: kTextColorSecondary),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                   color: kAccentColor
               )
           ),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                   color: kTextColorSecondary
               )
           )
