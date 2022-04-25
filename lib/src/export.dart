@@ -10,3 +10,6 @@ export 'animation_sample2/main.dart';
 export 'online_learning_sample/main.dart';
 export 'provider_sample/main.dart';
 export 'state_notifier_test/main.dart';
+export 'pageview_sample/main.dart';
+export 'animation_sample3/main.dart';
+export 'func_test/main.dart';

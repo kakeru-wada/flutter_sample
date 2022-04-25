@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/src/pageview_sample/main.dart';
 import 'package:untitled/src/sample_counter_app/main.dart';
 import 'src/export.dart';
 
@@ -21,6 +22,9 @@ List appList = [
   LearningSample(),
   ParentWidget(),
   TodoListView(),
+  PageViewSample(),
+  AnimationSample3(),
+  FuncTest(),
 ];
 List<String> appNameList = [
   'メインメニュー',
@@ -36,7 +40,10 @@ List<String> appNameList = [
   'animation_sample2',
   'online_learning_sample',
   'provider_sample',
-  'stateNotifier_test'
+  'stateNotifier_test',
+  'page_view_sample',
+  'animation_sample3',
+  'func_test',
 ];
 
 class appListPage extends StatelessWidget {
