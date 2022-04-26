@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'test_page2.dart';
 
 class TestPage1 extends StatelessWidget {
   @override
@@ -11,7 +10,7 @@ class TestPage1 extends StatelessWidget {
         body: Center(
             child: Container(
                 color: Colors.redAccent,
-                child: Text("Test1", style: TextStyle(fontSize: 80))
+                child: Text("Swipe", style: TextStyle(fontSize: 80))
             )
         ),
         floatingActionButton: Padding(

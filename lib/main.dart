@@ -41,9 +41,9 @@ List<String> appNameList = [
   'online_learning_sample',
   'provider_sample',
   'stateNotifier_test',
-  'page_view_sample',
-  'animation_sample3',
-  'func_test',
+  'ページ遷移のテスト',
+  'アニメーションのテスト3',
+  'ファンクションのテスト',
 ];
 
 class appListPage extends StatelessWidget {
@@ -72,28 +72,29 @@ class _appCardListState extends State<appCardList> {
       ),
       drawer: appNavBar(),
       body: ListView.builder(
-        itemCount: appList.length-1,
-        itemBuilder: (context, index) {
-          return Card(
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) {
-                      return appList[index+1];
-                    })
-                  );
-                },
-                child: Text(
-                  appNameList[index+1],
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20
+            padding: EdgeInsets.only(top: 50, bottom: 50),
+            itemCount: appList.length-1,
+            itemBuilder: (context, index) {
+              return Card(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) {
+                          return appList[index+1];
+                        })
+                      );
+                    },
+                    child: Text(
+                      appNameList[index+1],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20
+                      ),
+                    ),
                   ),
-                ),
-              ),
-          );
-        },
-      ),
+              );
+            },
+          ),
     );
   }
 }
@@ -117,6 +118,7 @@ class appNavBar extends StatelessWidget {
               ),
             ),
             ListView.builder(
+              padding: EdgeInsets.only(bottom: 50),
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: appList.length,
