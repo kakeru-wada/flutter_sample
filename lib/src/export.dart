@@ -13,3 +13,4 @@ export 'state_notifier_test/main.dart';
 export 'pageview_sample/main.dart';
 export 'animation_sample3/main.dart';
 export 'func_test/main.dart';
+export 'sudoku_app/sudoku_app.dart';

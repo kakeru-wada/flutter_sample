@@ -24,6 +24,7 @@ List appList = [
   PageViewSample(),
   AnimationSample3(),
   FuncTest(),
+  SudokuApp(),
 ];
 List<String> appNameList = [
   'メインメニュー',
@@ -43,6 +44,7 @@ List<String> appNameList = [
   'ページ遷移のテスト',
   'アニメーションのテスト3',
   'ファンクションのテスト',
+  'sudoku_app',
 ];
 
 class appListPage extends StatelessWidget {
