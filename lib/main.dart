@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/src/pageview_sample/main.dart';
 import 'package:untitled/src/sample_counter_app/main.dart';
 import 'src/export.dart';
 
@@ -10,15 +9,15 @@ void main() {
 List appList = [
   appListPage(),
   FirstSampleApp(),
-  ListViewApp(),
+  //ListViewApp(),
   SampleTodoApp(),
   CounterApp(),
-  LogInUI(),
+  //LogInUI(),
   AdminMobileSampleApp(),
-  BatteryOptimizer(),
+  //BatteryOptimizer(),
   FlightBooking(),
-  AnimationSample(),
-  AnimationSample2(),
+  //AnimationSample(),
+  //AnimationSample2(),
   LearningSample(),
   ParentWidget(),
   TodoListView(),
@@ -29,15 +28,15 @@ List appList = [
 List<String> appNameList = [
   'メインメニュー',
   'first_sample',
-  'sample_list_view',
+  //'sample_list_view',
   'sample_todo_app',
   'sample_counter',
-  'sign_in_sample',
+  //'sign_in_sample',
   'admin_mobile_sample',
-  'battery_optimizer_sample',
+  //'battery_optimizer_sample',
   'flight_booking_sample',
-  'animation_sample',
-  'animation_sample2',
+  //'animation_sample',
+  //'animation_sample2',
   'online_learning_sample',
   'provider_sample',
   'stateNotifier_test',
