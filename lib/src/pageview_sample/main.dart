@@ -12,6 +12,11 @@ class PageViewSample extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: PageViewPage(title: 'Flutter Demo Home Page'),
+      routes: {
+        '/test1': (BuildContext context) => TestPage1(),
+        '/test2': (BuildContext context) => TestPage2(),
+        '/test3': (BuildContext context) => TestPage3(),
+      },
     );
   }
 }
@@ -57,9 +62,12 @@ class _PageViewPageState extends State<PageViewPage> {
     //return LoginPage();
 
     return Scaffold(
-        body: PageView(
-            controller: _pageController,
-            onPageChanged: _onPageChanged,
-            children: _pages));
+        body: Center(
+          child: PageView(
+              controller: _pageController,
+              onPageChanged: _onPageChanged,
+              children: _pages),
+        ),
+    );
   }
 }

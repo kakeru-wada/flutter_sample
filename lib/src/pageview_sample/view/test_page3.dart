@@ -9,6 +9,20 @@ class TestPage3 extends StatelessWidget {
         body: Center(
             child: Container(
                 color: Colors.greenAccent,
-                child: Text("Test3", style: TextStyle(fontSize: 80)))));
+                child: Text("Test3", style: TextStyle(fontSize: 80))
+            )
+        ),
+        floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton(
+            onPressed: () => {
+              Navigator.of(context).pop()
+            },
+            child: Text('戻る'),
+          )
+        ],
+      )
+    );
   }
 }
