@@ -32,7 +32,7 @@ class ChildWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final CountData data = context.watch<CountData>();
 
-    return Column(
+    return Scaffold(body: Column(
       children: <Widget>[
         Text('count is ${data.count.toString()}'),
         TextButton(
@@ -42,6 +42,6 @@ class ChildWidget extends StatelessWidget {
           },
         )
       ],
-    );
+    ));
   }
 }
