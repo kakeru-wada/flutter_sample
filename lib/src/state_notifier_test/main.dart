@@ -84,7 +84,7 @@ class TodoListView extends ConsumerWidget {
     List<Todo> todos = ref.watch(todosProvider);
 
     // スクロール可能なリストビューで Todo リストの内容を表示
-    return ListView(
+    return ProviderScope(child: Scaffold(body: ListView(
       children: [
         for (final todo in todos)
           CheckboxListTile(
@@ -94,6 +94,6 @@ class TodoListView extends ConsumerWidget {
             title: Text(todo.description),
           ),
       ],
-    );
+    )));
   }
 }
