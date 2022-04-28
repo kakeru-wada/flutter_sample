@@ -15,4 +15,4 @@ export 'animation_sample3/main.dart';
 export 'func_test/main.dart';
 export 'sudoku_app/sudoku_app.dart';
 export 'async_sample/async_test_page.dart';
-export 'inherited_widget_test/inherited_app.dart';
+export 'state_management_test/inherited_app.dart';

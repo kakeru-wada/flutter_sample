@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'provider_page.dart';
+import 'provider_app.dart';
 
 class InheritedApp extends StatelessWidget {
   @override
