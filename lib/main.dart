@@ -26,6 +26,7 @@ List appList = [
   FuncTest(),
   SudokuApp(),
   AsyncTest(),
+  InheritedApp(),
 ];
 List<String> appNameList = [
   'メインメニュー',
@@ -47,6 +48,7 @@ List<String> appNameList = [
   'ファンクションのテスト',
   'sudoku_app',
   'async_test',
+  'inherited_demo',
 ];
 
 class appListPage extends StatelessWidget {
