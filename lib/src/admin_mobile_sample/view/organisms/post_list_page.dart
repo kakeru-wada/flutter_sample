@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
 import '../../export.dart';
+import '../../model/post_model.dart';
 
-class Post extends ConsumerWidget {
+class Post extends StatelessWidget {
   final String name;
   final String message;
   final String textReason;
@@ -26,7 +27,7 @@ class Post extends ConsumerWidget {
 
   //投稿cardを表示するwidget
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Card(
@@ -118,27 +119,56 @@ class Post extends ConsumerWidget {
   }
 }
 
-
-class PostList extends ConsumerWidget {
+class PostList extends StatefulWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    List PostTextsList = ref.watch(postProvider);
-    return Container(
-      padding: EdgeInsets.only(top: 48),
-      child: Column(
-          mainAxisSize:  MainAxisSize.max,
-          children: [
-            PostsHeader(),
-            Expanded(
-                child: ListView.builder(
-                  itemCount: PostTextsList.length,
-                  itemBuilder: (context, index) {
-                    return PostTextsList[index];
-                  },
-                )
-            )
-          ]
-      ),
+  _PostListState createState() => _PostListState();
+}
+class _PostListState extends State<PostList> {
+  @override
+  Widget build(BuildContext context) {
+
+      Widget _emptyView() {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("投稿はありません"),
+              SizedBox(height: 16),
+              Text(
+                '+ボタンから追加してください',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+
+      if (context.watch<PostModel>().contentsList.isEmpty) {
+        return _emptyView();
+      }
+      return
+      Container(
+        padding: EdgeInsets.only(top: 48),
+        child: Column(
+            mainAxisSize:  MainAxisSize.max,
+            children: [
+              PostsHeader(),
+              Expanded(
+                  child: ListView.builder(
+                    itemCount: context.watch<PostModel>().contentsList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Post(
+                          name: context.watch<PostModel>().contentsList[index].name,
+                          message: context.watch<PostModel>().contentsList[index].message
+                      );
+                    },
+                  )
+              )
+            ]
+        ),
     );
   }
 }

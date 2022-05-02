@@ -13,7 +13,6 @@ class NotifyData with ChangeNotifier {
 class NotifierPage extends StatefulWidget {
   _NotifierPageState createState() => _NotifierPageState();
 }
-
 class _NotifierPageState extends State<NotifierPage> {
   @override
   Widget build(BuildContext context) {
