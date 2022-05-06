@@ -10,8 +10,8 @@ List appList = [
   appListPage(),
   FirstSampleApp(),
   //ListViewApp(),
-  SampleTodoApp(),
-  CounterApp(),
+  // SampleTodoApp(),
+  // CounterApp(),
   //LogInUI(),
   AdminMobileSampleApp(),
   //BatteryOptimizer(),
@@ -27,13 +27,14 @@ List appList = [
   SudokuApp(),
   AsyncTest(),
   InheritedApp(),
+  BookStore(),
 ];
 List<String> appNameList = [
   'メインメニュー',
   'first_sample',
   //'sample_list_view',
-  'sample_todo_app',
-  'sample_counter',
+  // 'sample_todo_app',
+  // 'sample_counter',
   //'sign_in_sample',
   'admin_mobile_sample',
   //'battery_optimizer_sample',
@@ -49,6 +50,7 @@ List<String> appNameList = [
   'sudoku_app',
   'async_test',
   'inherited_demo',
+  'navigation_and_routing'
 ];
 
 class appListPage extends StatelessWidget {
