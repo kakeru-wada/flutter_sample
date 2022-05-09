@@ -4,6 +4,7 @@ import '../../export.dart';
 import '../../model/post_model.dart';
 
 class Post extends StatelessWidget {
+  final int index;
   final String name;
   final String message;
   final String textReason;
@@ -15,14 +16,15 @@ class Post extends StatelessWidget {
 
   const Post({
     Key? key,
+    required this.index,
     this.name = 'default_name',
     this.message = 'default_message' ,
-    this.textReason = 'default_textReason' ,
+    this.textReason = 'test' ,
     this.colorPrimary = Colors.blueAccent,
     this.colorPositive = Colors.blueAccent,
-    this.textPositive = 'default_text',
+    this.textPositive = 'text',
     this.colorNegative = Colors.amberAccent,
-    this.deleteText = 'default_deleteText',
+    this.deleteText = 'delete',
   }) : super(key:  key);
 
   //投稿cardを表示するwidget
@@ -96,6 +98,7 @@ class Post extends StatelessWidget {
                           primary: colorNegative,
                         ),
                         onPressed: () {
+                          context.read<PostModel>().deleteContents(index);
                         },
                         child: Text(deleteText),
                       )),
@@ -161,6 +164,7 @@ class _PostListState extends State<PostList> {
                     itemCount: context.watch<PostModel>().contentsList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Post(
+                          index: index,
                           name: context.watch<PostModel>().contentsList[index].name,
                           message: context.watch<PostModel>().contentsList[index].message
                       );

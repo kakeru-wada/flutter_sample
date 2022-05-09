@@ -16,4 +16,9 @@ class PostModel with ChangeNotifier {
     ];
     notifyListeners();
   }
+
+  void deleteContents(int index) {
+    contentsList.removeAt(index);
+    notifyListeners();
+  }
 }
