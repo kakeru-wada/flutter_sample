@@ -12,7 +12,10 @@ class AdminMobileSampleApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.light(),
-      home: AdminMobilePageState(),
+      home: ChangeNotifierProvider<PostModel>(
+        create: (context) => PostModel(),
+        child: AdminMobilePageState(),
+      ),
     );
   }
 }
@@ -20,35 +23,34 @@ class AdminMobileSampleApp extends StatelessWidget {
 class AdminMobilePageState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PostModel>(
-        create: (context)=> PostModel(),
-        child : Scaffold(
-          appBar: appBar(
-            title: '',
-          ),
-          // drawer: appNavBar(),
-          body: SafeArea(
-            child: Row(
-              children: [
-                SideNavigation(),
-                VerticalDivider(thickness: 1, width: 1,),
-                Expanded(child: PostList())
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context){
-                  return ChangeNotifierProvider<PostModel>(
-                    create: (context) => PostModel(),
-                    child: AddPostPage(),
-                  );
-                })
+    return Scaffold(
+      appBar: appBar(
+        title: '',
+      ),
+      // drawer: appNavBar(),
+      body: SafeArea(
+        child: Row(
+          children: [
+            SideNavigation(),
+            VerticalDivider(thickness: 1, width: 1,),
+            Expanded(child: PostList())
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          PostModel postModel = context.read<PostModel>();
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context){
+              return ChangeNotifierProvider<PostModel>.value(
+                value: postModel,
+                child: AddPostPage(),
               );
-                },
-            child: Icon(Icons.add)
-          ),
-    ));
+            })
+          );
+            },
+        child: Icon(Icons.add)
+      ),
+    );
   }
 }
