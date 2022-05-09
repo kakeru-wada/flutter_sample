@@ -11,8 +11,8 @@ class BookStore extends StatelessWidget {
       ChangeNotifierProvider<BottomNavBarState>(
         create: (context) => BottomNavBarState(),
       ),
-      ChangeNotifierProvider(
-        create: (context) => RouteState(),
+      ChangeNotifierProvider<TabIndexState>(
+        create: (context) => TabIndexState(),
       )
     ],
     child: MaterialApp(
