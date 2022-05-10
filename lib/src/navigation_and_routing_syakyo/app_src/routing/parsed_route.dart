@@ -4,19 +4,18 @@ import 'package:quiver/core.dart';
 import 'parser.dart';
 
 class ParsedRoute {
-  final String path;// (/book/123)
+  final String path;
 
-  final String pathTemplate;// (/book/:id)
+  final String pathTemplate;
 
-  final Map<String, String> parameters;// ({id: 123})
+  final Map<String, String> parameters;
 
-  final Map<String, String> queryParameters;// ({search: abc})
+  final Map<String, String> queryParameters;
 
   static const _mapEquality = MapEquality<String, String>();
 
   ParsedRoute(
-      this.parameters, this.path, this.pathTemplate, this.queryParameters
-      );
+      this.path, this.pathTemplate, this.parameters, this.queryParameters);
 
   @override
   bool operator ==(Object other) =>

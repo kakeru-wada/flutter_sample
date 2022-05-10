@@ -6,7 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'parsed_route.dart';
 import 'route_state.dart';
 
-class SimpleRouterDelegate extends RouterDelegate<ParsedRoute> with ChangeNotifier, PopNavigatorRouterDelegateMixin<ParseRoute> {
+class SimpleRouterDelegate extends RouterDelegate<ParsedRoute>
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin<ParsedRoute> {
   final RouteState routeState;
   final WidgetBuilder builder;
 
@@ -16,8 +17,8 @@ class SimpleRouterDelegate extends RouterDelegate<ParsedRoute> with ChangeNotifi
   SimpleRouterDelegate({
     required this.routeState,
     required this.builder,
-    required this.navigatorKey
-}) {
+    required this.navigatorKey,
+  }) {
     routeState.addListener(notifyListeners);
   }
 
