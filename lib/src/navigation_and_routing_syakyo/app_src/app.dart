@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'auth.dart';
 import 'routing.dart';
@@ -50,27 +51,32 @@ class _BookstoreState extends State<Bookstore> {
   }
 
   @override
-  Widget build(BuildContext context) => RouteStateScope(
-    notifier: _routeState,
-    child: BookstoreAuthScope(
-      notifier: _auth,
-      child: MaterialApp.router( //routerの設定
-        routerDelegate: _routerDelegate, //必須の引数routerDelegate
-        routeInformationParser: _routeParser, //必須の引数routeInformationParser
-        theme: ThemeData(
+  Widget build(BuildContext context) => MultiProvider(
+    providers: [
+      ChangeNotifierProvider<RouteState>(
+        create: (context) => _routeState,
+      ),
+      ChangeNotifierProvider<BookstoreAuth>(
+        create: (context) => _auth,
+      )
+    ],
+    child: MaterialApp.router( //routerの設定
+      routerDelegate: _routerDelegate, //必須の引数routerDelegate
+      routeInformationParser: _routeParser, //必須の引数routeInformationParser
+      theme: ThemeData(
           pageTransitionsTheme: const PageTransitionsTheme(
-            builders: {
-              TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-              TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
-              TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-              TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
-            }
+              builders: {
+                TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+                TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+                TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+                TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+                TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+              }
           )
-        ),
       ),
     ),
   );
+
 
   Future<ParsedRoute> _guard(ParsedRoute from) async {
     final signedIn = _auth.signedIn;

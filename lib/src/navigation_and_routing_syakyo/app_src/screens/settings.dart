@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 
+import 'package:provider/provider.dart';
 import '../auth.dart';
 import '../routing.dart';
 
@@ -48,7 +49,7 @@ class SettingsContent extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            BookstoreAuthScope.of(context).signOut();
+            context.watch<BookstoreAuth>().signOut();
           },
           child: const Text('Sign out'),
         ),
@@ -62,7 +63,7 @@ class SettingsContent extends StatelessWidget {
         TextButton(
           child: const Text('Go directly to /book/0 (RouteState)'),
           onPressed: () {
-            RouteStateScope.of(context).go('/book/0');
+            context.watch<RouteState>().go('/book/0');
           },
         ),
       ].map((w) => Padding(padding: const EdgeInsets.all(8), child: w)),

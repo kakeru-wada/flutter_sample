@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../data.dart';
 import '../routing.dart';
 import '../widgets/book_list.dart';
@@ -25,7 +25,7 @@ class AuthorDetailsScreen extends StatelessWidget {
             child: BookList(
               books: author.books,
               onTap: (book) {
-                RouteStateScope.of(context).go('/book/${book.id}');
+                context.watch<RouteState>().go('/book/${book.id}');
               },
             ),
           ),

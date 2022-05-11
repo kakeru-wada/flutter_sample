@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../routing.dart';
 import '../screens/settings.dart';
 import '../widgets/fade_transition_page.dart';
@@ -17,7 +17,7 @@ class BookstoreScaffoldBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var currentRoute = RouteStateScope.of(context).route;
+    var currentRoute = context.watch<RouteState>().route;
 
     return Navigator(
       key: navigatorKey,
@@ -39,7 +39,7 @@ class BookstoreScaffoldBody extends StatelessWidget {
               key: ValueKey('books'),
               child: BooksScreen(),
             )
-            
+
           else
             FadeTransitionPage<void>(
               key: const ValueKey('empty'),

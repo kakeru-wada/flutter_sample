@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
 import '../auth.dart';
 import '../data.dart';
 import '../routing.dart';
@@ -30,8 +31,8 @@ class _BookstoreNavigatorState extends State<BookstoreNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    final routeState = RouteStateScope.of(context);
-    final authState = BookstoreAuthScope.of(context);
+    final routeState = context.watch<RouteState>();
+    final authState = context.watch<BookstoreAuth>();
     final pathTemplate = routeState.route.pathTemplate;
 
     Book? selectedBook;

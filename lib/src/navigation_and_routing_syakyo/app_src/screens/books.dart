@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
 import '../data.dart';
 import '../routing.dart';
 import '../widgets/book_list.dart';
@@ -46,46 +47,51 @@ class _BooksScreenState extends State<BooksScreen>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('Books'),
-      bottom: TabBar(
-        controller: _tabController,
-        tabs: const [
-          Tab(
-            text: 'Popular',
-            icon: Icon(Icons.people),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          TabBar(
+            labelColor: Colors.blue,
+            controller: _tabController,
+            tabs: const [
+              Tab(
+                text: 'Popular',
+                icon: Icon(Icons.people),
+              ),
+              Tab(
+                text: 'New',
+                icon: Icon(Icons.new_releases),
+              ),
+              Tab(
+                text: 'All',
+                icon: Icon(Icons.list),
+              ),
+            ],
           ),
-          Tab(
-            text: 'New',
-            icon: Icon(Icons.new_releases),
-          ),
-          Tab(
-            text: 'All',
-            icon: Icon(Icons.list),
-          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                BookList(
+                  books: libraryInstance.popularBooks,
+                  onTap: _handleBookTapped,
+                ),
+                BookList(
+                  books: libraryInstance.newBooks,
+                  onTap: _handleBookTapped,
+                ),
+                BookList(
+                  books: libraryInstance.allBooks,
+                  onTap: _handleBookTapped,
+                ),
+              ],
+            ),
+          )
         ],
       ),
-    ),
-    body: TabBarView(
-      controller: _tabController,
-      children: [
-        BookList(
-          books: libraryInstance.popularBooks,
-          onTap: _handleBookTapped,
-        ),
-        BookList(
-          books: libraryInstance.newBooks,
-          onTap: _handleBookTapped,
-        ),
-        BookList(
-          books: libraryInstance.allBooks,
-          onTap: _handleBookTapped,
-        ),
-      ],
-    ),
   );
 
-  RouteState get _routeState => RouteStateScope.of(context);
+  RouteState get _routeState => context.read<RouteState>();
 
   void _handleBookTapped(Book book) {
     _routeState.go('/book/${book.id}');

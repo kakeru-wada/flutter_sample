@@ -12,7 +12,9 @@ void main() {
   setHashUrlStrategy();
 
   setupWindow();
-  runApp(const Bookstore());
+  runApp(
+      const Bookstore()
+  );
 }
 
 const double windowWidth = 480;
