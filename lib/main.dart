@@ -77,7 +77,9 @@ class _appCardListState extends State<appCardList> {
       appBar: appBar(
         title: 'メインメニュー',
       ),
-      drawer: appNavBar(),
+      drawer: appNavBar(
+
+      ),
       body: ListView.builder(
             padding: EdgeInsets.only(top: 50, bottom: 50),
             itemCount: appList.length-1,

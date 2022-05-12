@@ -49,7 +49,7 @@ class SettingsContent extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            context.watch<BookstoreAuth>().signOut();
+            context.read<BookstoreAuth>().signOut();
           },
           child: const Text('Sign out'),
         ),
