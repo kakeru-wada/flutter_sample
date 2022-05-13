@@ -26,10 +26,6 @@ class _AnimationPageState extends State<AnimationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
-        title: '',
-      ),
-      drawer: appNavBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {

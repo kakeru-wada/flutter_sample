@@ -23,10 +23,6 @@ class _TodoListPageState extends State<TodoListPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
-        title: 'メモ一覧',
-      ),
-      drawer: appNavBar(),
       body: ListView.builder(
         itemCount: todoList.length,
         itemBuilder: (context, index) {

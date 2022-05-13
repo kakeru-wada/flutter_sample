@@ -22,10 +22,6 @@ class SamplePage extends ConsumerWidget{
   Widget build(BuildContext context, WidgetRef ref) {
     final count = ref.watch(counterProvider);
     return Scaffold(
-      appBar: appBar(
-        title: 'カウンターアプリ',
-      ),
-      drawer: appNavBar(),
       body: Center(
         child: Text('$count'),
       ),

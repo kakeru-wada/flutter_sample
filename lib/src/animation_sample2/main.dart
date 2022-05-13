@@ -49,10 +49,6 @@ class _AnimationPageState extends State<AnimationPage2> with SingleTickerProvide
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
-        title: '',
-      ),
-      drawer: appNavBar(),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

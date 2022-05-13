@@ -1,171 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/src/sample_counter_app/main.dart';
-import 'src/export.dart';
+import 'package:provider/provider.dart';
+import 'src/routing_exp.dart';
+import 'navigator.dart';
 
 void main() {
-  runApp(appListPage());
+  runApp(appMainPage());
 }
 
-List appList = [
-  appListPage(),
-  FirstSampleApp(),
-  //ListViewApp(),
-  // SampleTodoApp(),
-  // CounterApp(),
-  //LogInUI(),
-  AdminMobileSampleApp(),
-  //BatteryOptimizer(),
-  FlightBooking(),
-  //AnimationSample(),
-  //AnimationSample2(),
-  LearningSample(),
-  ParentWidget(),
-  TodoListView(),
-  PageViewSample(),
-  AnimationSample3(),
-  FuncTest(),
-  SudokuApp(),
-  AsyncTest(),
-  InheritedApp(),
-  BookStore(),
-];
-List<String> appNameList = [
-  'メインメニュー',
-  'first_sample',
-  //'sample_list_view',
-  // 'sample_todo_app',
-  // 'sample_counter',
-  //'sign_in_sample',
-  'admin_mobile_sample',
-  //'battery_optimizer_sample',
-  'flight_booking_sample',
-  //'animation_sample',
-  //'animation_sample2',
-  'online_learning_sample',
-  'provider_sample',
-  'stateNotifier_test',
-  'ページ遷移のテスト',
-  'アニメーションのテスト3',
-  'ファンクションのテスト',
-  'sudoku_app',
-  'async_test',
-  'inherited_demo',
-  'navigation_and_routing'
-];
-
-class appListPage extends StatelessWidget {
+class appMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'app list page',
       theme: ThemeData.light(),
-      home: appCardList(),
+      home: appListPage(),
     );
   }
 }
 
-class appCardList extends StatefulWidget {
+class appListPage extends StatefulWidget {
+  const appListPage({Key? key}) : super(key: key);
   @override
-  _appCardListState createState() => _appCardListState();
+  _appListPageState createState() => _appListPageState();
 }
 
-class _appCardListState extends State<appCardList> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(
-        title: 'メインメニュー',
-      ),
-      drawer: appNavBar(
-
-      ),
-      body: ListView.builder(
-            padding: EdgeInsets.only(top: 50, bottom: 50),
-            itemCount: appList.length-1,
-            itemBuilder: (context, index) {
-              return Card(
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) {
-                          return appList[index+1];
-                        })
-                      );
-                    },
-                    child: Text(
-                      appNameList[index+1],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                      ),
-                    ),
-                  ),
-              );
-            },
-          ),
-    );
-  }
-}
-
-class appNavBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-        child: ListView(
-          children: <Widget>[
-            SizedBox(
-              height: 100,
-              child:
-              DrawerHeader(
-                  child: Text(
-                    'app list',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                        color: Theme.of(context).primaryColor),)
-              ),
-            ),
-            ListView.builder(
-              padding: EdgeInsets.only(bottom: 50),
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: appList.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(appNameList[index], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) {
-                          return appList[index];
-                        })
-                    );
-                  },
-                );
-              },
-            )
-          ],
-        ),
-    );
-  }
-}
-class appBar extends StatelessWidget with PreferredSizeWidget {
-  final String title;
-  final int elevation;
-  appBar({this.title = '', this.elevation = 4});
-  @override
-  Widget build(BuildContext context) {
-    return PreferredSize(
-        child: AppBar(
-          // elevation: elevation,
-          centerTitle: true,
-          title: Text(title),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
-        preferredSize: Size.fromHeight(100.0)
-    );
-  }
+class _appListPageState extends State<appListPage> {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  late final MainRouteState _routeState;
+  late final SimpleRouterDelegate _routerDelegate;
+  late final TemplateRouteParser _routeParser;
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  void initState() {
+    _routeParser = TemplateRouteParser(
+      allowedPaths: [
+        '/appMain',
+        '/navigation_and_routing',
+        '/admin_mobile_sample',
+        '/first_sample',
+        '/sudoku_app'
+      ],
+      initialRoute: '/appMain'
+    );
+
+    _routeState = MainRouteState(_routeParser);
+
+    _routerDelegate = SimpleRouterDelegate(
+      routeState: _routeState,
+      navigatorKey: _navigatorKey,
+      builder: (context) => mainNavigator(
+        navigatorKey: _navigatorKey,
+      )//Navigatorを入れる
+    );
+
+    super.initState();
+  }
+
+  Widget build(BuildContext context) => MultiProvider(
+    providers: [
+      ChangeNotifierProvider<MainRouteState>(
+        create: (context) => _routeState,
+      )
+    ],
+    child: MaterialApp.router(
+      routerDelegate: _routerDelegate,
+      routeInformationParser: _routeParser,
+    ),
+  );
+
+  void dispose() {
+    _routeState.dispose();
+    _routerDelegate.dispose();
+    super.dispose();
+  }
 }

@@ -17,3 +17,4 @@ export 'sudoku_app/sudoku_app.dart';
 export 'async_sample/async_test_page.dart';
 export 'state_management_test/inherited_app.dart';
 export 'navigation_and_routing/navigation_app.dart';
+export 'navigation_and_routing_syakyo/app_src/app.dart';

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'view.dart';
 import 'controller/route_state.dart';
 
-class BookStore extends StatelessWidget {
+class SampleBookStore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   return MultiProvider(

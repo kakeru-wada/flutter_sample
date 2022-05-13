@@ -41,6 +41,7 @@ class SampleRouterDelegate extends RouterDelegate<ParsedRoute>
     );
   }
 
+  //OS側からアプリ状態の変更があった際に呼ばれる処理
   @override
   Future<void> setNewRoutePath(ParsedRoute configuration) async {
     _routeState.isLogin = configuration.isHomeSection;

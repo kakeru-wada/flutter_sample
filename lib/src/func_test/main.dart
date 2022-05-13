@@ -30,10 +30,6 @@ class _FuncTestPageState extends State<FuncTestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
-        title: 'Func Test',
-        elevation: 0,
-      ),
       endDrawer: Drawer(
         child: ListView(
           children: [

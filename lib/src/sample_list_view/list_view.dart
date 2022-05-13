@@ -23,10 +23,6 @@ class ListViewApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
-        appBar: appBar(
-          title: 'リスト',
-        ),
-        drawer: appNavBar(),
         body: Column(
           children: <Widget>[
             Container(
